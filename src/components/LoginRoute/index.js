@@ -1,6 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-// import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import ThemeContext from '../../Context/ThemeContext'
 import {
   BackgroundHolder,
@@ -37,7 +37,6 @@ class LoginRoute extends Component {
 
   onSubmitSuccess = jwtToken => {
     const {history} = this.props
-
     Cookies.set('jwt_token', jwtToken, {expires: 30})
     history.replace('/')
     console.log('login successful')
@@ -62,6 +61,10 @@ class LoginRoute extends Component {
   }
 
   render() {
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken !== undefined) {
+      return <Redirect to="/" />
+    }
     return (
       <ThemeContext.Consumer>
         {value => {

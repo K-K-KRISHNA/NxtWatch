@@ -57,6 +57,7 @@ export const LoginButton = styled.button`
   color: #ffffff;
   margin-top: 20px;
   border-width: 0px;
+  cursor: pointer;
 `
 export const ErrorPara = styled.p`
   color: red;
