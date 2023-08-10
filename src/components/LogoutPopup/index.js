@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {FiLogOut} from 'react-icons/fi'
 import Popup from 'reactjs-popup'
 import ThemeContext from '../../Context/ThemeContext'
 
@@ -10,6 +11,8 @@ import {
   Buttons,
   PopupCancelButton,
   PopupConfirmButton,
+  LogoutIcon,
+  TempDiv,
 } from './styledComponents'
 
 import 'reactjs-popup/dist/index.css'
@@ -31,9 +34,14 @@ class LogoutPopup extends Component {
               <Popup
                 modal
                 trigger={
-                  <LogoutButton modal isDark={isDark}>
-                    Logout
-                  </LogoutButton>
+                  <TempDiv>
+                    <LogoutButton modal isDark={isDark}>
+                      Logout
+                    </LogoutButton>
+                    <LogoutIcon modal isDark={isDark}>
+                      <FiLogOut />
+                    </LogoutIcon>
+                  </TempDiv>
                 }
               >
                 {close => (

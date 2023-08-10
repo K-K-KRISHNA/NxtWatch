@@ -10,7 +10,8 @@ export const HeaderContainer = styled.div`
 `
 
 export const LogoIcon = styled.img`
-  width: 10%;
+  width: 40%;
+  cursor: pointer;
 `
 export const RightHeaderContainer = styled.div`
   display: flex;

@@ -16,7 +16,12 @@ export const LogoutButton = styled.button`
   text-align: center;
   align-self: center;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `
+export const TempDiv = styled.div``
+
 export const PopupCancelButton = styled.button`
   background-color: transparent;
   color: ${props => (props.isDark ? 'gray' : 'black')};
@@ -58,4 +63,19 @@ export const Buttons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+`
+export const LogoutIcon = styled.div`
+  display: flex;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+  background-color: transparent;
+  color: ${props => (props.isDark ? 'white' : 'blue')};
+  border-color: ${props => (props.isDark ? 'white' : 'blue')};
+  border-radius: 3px;
+  height: 25px;
+  width: 75px;
+  text-align: center;
+  align-self: center;
+  cursor: pointer;
 `
