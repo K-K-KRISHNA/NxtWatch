@@ -3,8 +3,46 @@ import styled from 'styled-components'
 export const SideContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${props => (props.isDark ? 'black' : 'cyan')};
+  background-color: ${props => (props.isDark ? 'black' : 'white')};
   justify-content: space-between;
   height: 100vh;
   width: 20vw;
+  padding-top: 30px;
+  margin-right: 0px;
+  padding-right: 0px;
+`
+
+export const TopContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: ${props => (props.isDark ? 'white' : 'black')};
+`
+export const EachContainer = styled.div`
+  display: flex;
+  cursor: pointer;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 0px;
+  height: 50px;
+  align-items: center;
+`
+export const EachTab = styled.p`
+  font-size: 20px;
+  margin-left: 15px;
+`
+export const ActiveContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-left: 20px;
+  height: 50px;
+  margin-bottom: 10px;
+  align-items: center;
+  font-weight: bolder;
+  background-color: ${props => (props.isDark ? '#909090' : '#cccccc')};
+`
+export const Span = styled.span`
+  color: ${props => props.color};
 `
