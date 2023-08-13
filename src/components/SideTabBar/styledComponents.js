@@ -5,8 +5,8 @@ export const SideContainer = styled.div`
   flex-direction: column;
   background-color: ${props => (props.isDark ? '#212121' : 'white')};
   justify-content: space-between;
-  height: 120vh;
-  width: 20vw;
+  min-height: 120vh;
+  width: 25vw;
   padding-top: 30px;
   margin-right: 0px;
   padding-right: 0px;

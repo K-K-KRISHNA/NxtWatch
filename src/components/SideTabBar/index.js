@@ -5,7 +5,6 @@ import {
   AiOutlinePlus,
   AiFillTwitterCircle,
   AiFillFacebook,
-  AiFillLinkedin,
 } from 'react-icons/ai'
 import {ImLinkedin} from 'react-icons/im'
 import {SiYoutubegaming} from 'react-icons/si'

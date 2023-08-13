@@ -79,3 +79,9 @@ export const Magnifier = styled.button`
   background-color: #909090;
   border-width: 0px;
 `
+export const SuccessContainer = styled.div`
+  display: flex;
+  padding: 20px;
+  width: 75vw;
+  flex-wrap: wrap;
+`

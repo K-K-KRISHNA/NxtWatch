@@ -2,6 +2,7 @@ import Cookies from 'js-cookie'
 import {Component} from 'react'
 import {AiOutlineClose, AiOutlineSearch} from 'react-icons/ai'
 import Header from '../Header'
+import EachCard from '../EachCard'
 import SideTabBar from '../SideTabBar'
 
 import {
@@ -17,6 +18,7 @@ import {
   CustomSearchBar,
   TaleContainer,
   Magnifier,
+  SuccessContainer,
 } from './styledComponents'
 import ThemeContext from '../../Context/ThemeContext'
 
@@ -25,6 +27,21 @@ const apiStatusConstants = {
   success: 'SUCCESS',
   failure: 'FAILURE',
   inProgress: 'IN_PROGRESS',
+}
+
+const tempData = {
+  channel: {
+    name: 'iB Cricket',
+    profileImageUrl:
+      'https://assets.ccbp.in/frontend/react-js/nxt-watch/ib-cricket-img.png',
+  },
+  id: '30b642bd-7591-49f4-ac30-5c538f975b15',
+  publishedAt: 'Apr 19, 2019',
+  thumbnailUrl:
+    'https://assets.ccbp.in/frontend/react-js/nxt-watch/ibc-sol-1-img.png',
+  title:
+    'Sehwag shares his batting experience in iB Cricket | iB Cricket Super Over League',
+  viewCount: '1.4K',
 }
 
 class HomeRoute extends Component {
@@ -82,7 +99,16 @@ class HomeRoute extends Component {
 
   loadingView = () => <h1>Loading</h1>
 
-  successView = () => <h1>SuccessView</h1>
+  successView = () => {
+    const {videosList} = this.state
+    return (
+      <SuccessContainer>
+        {videosList.map(eachData => (
+          <EachCard data={eachData} />
+        ))}
+      </SuccessContainer>
+    )
+  }
 
   failureView = () => <h1>FailureView</h1>
 
