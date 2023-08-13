@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 import {Component} from 'react'
-import {AiOutlineClose} from 'react-icons/ai'
+import {AiOutlineClose, AiOutlineSearch} from 'react-icons/ai'
 import Header from '../Header'
 import SideTabBar from '../SideTabBar'
 
@@ -12,9 +12,13 @@ import {
   Banner,
   Tagline,
   CrossButton,
+  SearchBarHolder,
   GetitNowButton,
+  CustomSearchBar,
+  TaleContainer,
+  Magnifier,
 } from './styledComponents'
-// import ThemeContext from '../../Context/ThemeContext'
+import ThemeContext from '../../Context/ThemeContext'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -27,7 +31,8 @@ class HomeRoute extends Component {
   state = {
     isBanner: true,
     apiStatus: apiStatusConstants.initial,
-    videos: [],
+    videosList: [],
+    searchValue: '',
   }
 
   componentDidMount() {
@@ -36,8 +41,9 @@ class HomeRoute extends Component {
 
   getVideos = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
+    const {searchValue} = this.state
     const jwtToken = Cookies.get('jwt_token')
-    const apiUrl = 'https://apis.ccbp.in/videos/'
+    const apiUrl = `https://apis.ccbp.in/videos/all?search=${searchValue}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -47,8 +53,16 @@ class HomeRoute extends Component {
     const response = await fetch(apiUrl, options)
     if (response.ok) {
       const fetchedData = await response.json()
-      console.log(fetchedData)
-      this.setState({apiStatus: apiStatusConstants.success})
+      const updatedData = fetchedData.videos.map(item =>
+        this.changeToCamelCase(item),
+      )
+      this.setState(
+        {
+          videosList: updatedData,
+          apiStatus: apiStatusConstants.success,
+        },
+        console.log(updatedData),
+      )
     } else {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
@@ -58,46 +72,91 @@ class HomeRoute extends Component {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.inProgress:
-        return <h1>Loading.....</h1>
+        return this.loadingView()
       case apiStatusConstants.success:
-        return <h1>Successfully Fetched data...</h1>
+        return this.successView()
       default:
-        return <h1>Failed to Fetched the Data..</h1>
+        return this.failureView()
     }
   }
+
+  loadingView = () => <h1>Loading</h1>
+
+  successView = () => <h1>SuccessView</h1>
+
+  failureView = () => <h1>FailureView</h1>
+
+  onChangeSearchInput = event =>
+    this.setState({searchValue: event.target.value})
+
+  changeChannelObj = channel => ({
+    name: channel.name,
+    profileImageUrl: channel.profile_image_url,
+  })
+
+  changeToCamelCase = item => ({
+    id: item.id,
+    title: item.title,
+    thumbnailUrl: item.thumbnail_url,
+    channel: this.changeChannelObj(item.channel),
+    viewCount: item.view_count,
+    publishedAt: item.published_at,
+  })
 
   closeBanner = () => this.setState({isBanner: false})
 
   render() {
-    const {isBanner} = this.state
+    const {isBanner, searchValue} = this.state
 
     return (
-      <>
-        <Header />
-        <HomeContainer>
-          <SideTabBar />
-          <RemainContainer>
-            {isBanner && (
-              <Banner>
-                <PremiumSection>
-                  <Logo
-                    src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                    alt="website logo"
-                  />
-                  <Tagline>
-                    Buy Nxt Watch Premium prepaid plans with UPI
-                  </Tagline>
-                  <GetitNowButton>GET IT NOW</GetitNowButton>
-                </PremiumSection>
-                <CrossButton>
-                  <AiOutlineClose size="20" onClick={this.closeBanner} />
-                </CrossButton>
-              </Banner>
-            )}
-            {this.renderSuitableView()}
-          </RemainContainer>
-        </HomeContainer>
-      </>
+      <ThemeContext.Consumer>
+        {value => {
+          const {isDark} = value
+          return (
+            <>
+              <Header />
+              <HomeContainer>
+                <SideTabBar />
+                <RemainContainer isDark={isDark}>
+                  {isBanner && (
+                    <Banner>
+                      <PremiumSection>
+                        <Logo
+                          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+                          alt="website logo"
+                        />
+                        <Tagline>
+                          Buy Nxt Watch Premium prepaid plans with UPI
+                        </Tagline>
+                        <GetitNowButton>GET IT NOW</GetitNowButton>
+                      </PremiumSection>
+                      <CrossButton>
+                        <AiOutlineClose size="20" onClick={this.closeBanner} />
+                      </CrossButton>
+                    </Banner>
+                  )}
+                  <TaleContainer>
+                    <SearchBarHolder>
+                      <CustomSearchBar
+                        placeholder="Search"
+                        type="search"
+                        isDark={isDark}
+                        onChange={this.onChangeSearchInput}
+                        value={searchValue}
+                      />
+                      <Magnifier onClick={this.getVideos}>
+                        <AiOutlineSearch />
+                      </Magnifier>
+                    </SearchBarHolder>
+                  </TaleContainer>
+
+                  {this.renderSuitableView()}
+                </RemainContainer>
+              </HomeContainer>
+            </>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 }

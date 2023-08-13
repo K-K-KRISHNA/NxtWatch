@@ -3,9 +3,9 @@ import styled from 'styled-components'
 export const SideContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${props => (props.isDark ? 'black' : 'white')};
+  background-color: ${props => (props.isDark ? '#212121' : 'white')};
   justify-content: space-between;
-  height: 100vh;
+  height: 120vh;
   width: 20vw;
   padding-top: 30px;
   margin-right: 0px;
@@ -45,4 +45,24 @@ export const ActiveContainer = styled.div`
 `
 export const Span = styled.span`
   color: ${props => props.color};
+`
+export const BottomContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: ${props => (props.isDark ? 'white' : 'black')};
+  padding-left: 10px;
+`
+export const Contact = styled.p`
+  font-size: 20px;
+  font-weight: bold;
+`
+export const IconContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+  color: #00306e;
+`
+
+export const EndNote = styled.p`
+  font-size: 17px;
 `

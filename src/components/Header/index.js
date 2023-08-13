@@ -28,18 +28,23 @@ class Header extends Component {
     return (
       <ThemeContext.Consumer>
         {value => {
-          const {isDark, toggleTheme} = value
+          const {isDark, toggleTheme, changeTab} = value
           const toggleMode = () => toggleTheme(isDark)
           const iconUrl = isDark
             ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
             : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
 
-          const bgColor = isDark ? 'black' : 'white'
-          const iconColor = !isDark ? 'black' : 'white'
+          const bgColor = isDark ? '#212121' : 'white'
+          const iconColor = !isDark ? '#212121' : 'white'
+          //
           return (
             <HeaderContainer backgroundColor={bgColor}>
               <Link to="/">
-                <LogoIcon src={iconUrl} alt="website logo" />
+                <LogoIcon
+                  onClick={() => changeTab('Home')}
+                  src={iconUrl}
+                  alt="website logo"
+                />
               </Link>
               <RightHeaderContainer>
                 <ModeContainer iconColor={iconColor} onClick={toggleMode}>

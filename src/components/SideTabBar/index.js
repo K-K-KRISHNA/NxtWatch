@@ -1,5 +1,13 @@
 import {Link} from 'react-router-dom'
-import {AiFillHome, AiFillFire, AiOutlinePlus} from 'react-icons/ai'
+import {
+  AiFillHome,
+  AiFillFire,
+  AiOutlinePlus,
+  AiFillTwitterCircle,
+  AiFillFacebook,
+  AiFillLinkedin,
+} from 'react-icons/ai'
+import {ImLinkedin} from 'react-icons/im'
 import {SiYoutubegaming} from 'react-icons/si'
 import ThemeContext from '../../Context/ThemeContext'
 import {
@@ -9,6 +17,10 @@ import {
   TopContainer,
   ActiveContainer,
   Span,
+  Contact,
+  BottomContainer,
+  IconContainer,
+  EndNote,
 } from './styledComponents'
 
 const TabList = [
@@ -33,7 +45,6 @@ const SideTabBar = () => (
           <TopContainer isDark={isDark}>
             {TabList.map(eachValue => {
               const changeTheTab = () => changeTab(eachValue.tab)
-
               if (activeTabId !== eachValue.tab) {
                 return (
                   <Link
@@ -68,6 +79,17 @@ const SideTabBar = () => (
               )
             })}
           </TopContainer>
+          <BottomContainer isDark={isDark}>
+            <Contact>CONTACT US</Contact>
+            <IconContainer>
+              <AiFillFacebook size="30" />
+              <AiFillTwitterCircle size="30" />
+              <ImLinkedin size="30" />
+            </IconContainer>
+            <EndNote>
+              Enjoy! Now to see your channels and recommendations!
+            </EndNote>
+          </BottomContainer>
         </SideContainer>
       )
     }}
