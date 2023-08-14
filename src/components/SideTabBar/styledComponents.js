@@ -5,7 +5,7 @@ export const SideContainer = styled.div`
   flex-direction: column;
   background-color: ${props => (props.isDark ? '#212121' : 'white')};
   justify-content: space-between;
-  min-height: 120vh;
+  min-height: 90vh;
   width: 25vw;
   padding-top: 30px;
   margin-right: 0px;
@@ -65,4 +65,7 @@ export const IconContainer = styled.div`
 
 export const EndNote = styled.p`
   font-size: 17px;
+`
+export const Logo = styled.img`
+  width: 25%;
 `

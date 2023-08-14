@@ -4,7 +4,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 70px;
+  height: 10vh;
   padding: 30px;
   background-color: ${props => props.backgroundColor};
 `

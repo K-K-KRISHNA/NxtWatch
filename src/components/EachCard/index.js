@@ -12,7 +12,7 @@ import {
 
 const EachCard = props => {
   const {data} = props
-  const {channel, id, publishedAt, thumbnailUrl, title, viewCount} = data
+  const {channel, thumbnailUrl, title, viewCount} = data
   const {name, profileImageUrl} = channel
   return (
     <ThemeContext.Consumer>

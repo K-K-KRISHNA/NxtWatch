@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie'
 import {Component} from 'react'
+import Loader from 'react-loader-spinner'
 import {AiOutlineClose, AiOutlineSearch} from 'react-icons/ai'
 import Header from '../Header'
 import EachCard from '../EachCard'
@@ -19,6 +20,8 @@ import {
   TaleContainer,
   Magnifier,
   SuccessContainer,
+  LoaderContainer,
+  NoSearchImg,
 } from './styledComponents'
 import ThemeContext from '../../Context/ThemeContext'
 
@@ -27,21 +30,6 @@ const apiStatusConstants = {
   success: 'SUCCESS',
   failure: 'FAILURE',
   inProgress: 'IN_PROGRESS',
-}
-
-const tempData = {
-  channel: {
-    name: 'iB Cricket',
-    profileImageUrl:
-      'https://assets.ccbp.in/frontend/react-js/nxt-watch/ib-cricket-img.png',
-  },
-  id: '30b642bd-7591-49f4-ac30-5c538f975b15',
-  publishedAt: 'Apr 19, 2019',
-  thumbnailUrl:
-    'https://assets.ccbp.in/frontend/react-js/nxt-watch/ibc-sol-1-img.png',
-  title:
-    'Sehwag shares his batting experience in iB Cricket | iB Cricket Super Over League',
-  viewCount: '1.4K',
 }
 
 class HomeRoute extends Component {
@@ -97,14 +85,28 @@ class HomeRoute extends Component {
     }
   }
 
-  loadingView = () => <h1>Loading</h1>
+  loadingView = () => (
+    <LoaderContainer data-testid="loader">
+      <Loader type="ThreeDots" color="blue" height="50" width="50" />
+    </LoaderContainer>
+  )
 
   successView = () => {
     const {videosList} = this.state
+    if (videosList.length === 0) {
+      return (
+        <>
+          <NoSearchImg
+            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+            alt="no videos"
+          />
+        </>
+      )
+    }
     return (
       <SuccessContainer>
         {videosList.map(eachData => (
-          <EachCard data={eachData} />
+          <EachCard data={eachData} key={eachData.id} />
         ))}
       </SuccessContainer>
     )

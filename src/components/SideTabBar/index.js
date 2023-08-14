@@ -20,6 +20,7 @@ import {
   BottomContainer,
   IconContainer,
   EndNote,
+  Logo,
 } from './styledComponents'
 
 const TabList = [
@@ -81,9 +82,18 @@ const SideTabBar = () => (
           <BottomContainer isDark={isDark}>
             <Contact>CONTACT US</Contact>
             <IconContainer>
-              <AiFillFacebook size="30" />
-              <AiFillTwitterCircle size="30" />
-              <ImLinkedin size="30" />
+              <Logo
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png"
+                alt="facebook logo"
+              />
+              <Logo
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-twitter-logo-img.png"
+                alt="twitter logo"
+              />
+              <Logo
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-linked-in-logo-img.png"
+                alt="linked in logo"
+              />
             </IconContainer>
             <EndNote>
               Enjoy! Now to see your channels and recommendations!

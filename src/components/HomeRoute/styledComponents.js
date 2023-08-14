@@ -85,3 +85,24 @@ export const SuccessContainer = styled.div`
   width: 75vw;
   flex-wrap: wrap;
 `
+export const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+export const NoSearchImg = styled.img`
+  width: 50%;
+  align-self: center;
+`
+export const RetryButton = styled.button`
+  background-color: #4f46e5;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-width: 0px;
+  border-radius: 5px;
+`
+export const H1 = styled.h2`
+  color: ${props => (props.isDark ? 'white' : 'black')};
+  text-align: center;
+`
