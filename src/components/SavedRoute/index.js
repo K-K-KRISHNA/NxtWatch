@@ -12,7 +12,12 @@ import {
   Heading,
   TempDiv,
   IconHolder,
-} from './styledComponents'
+} from '../TrendingRoute/styledComponents'
+import {
+  NoSearchImg,
+  NotFoundHeading,
+  SuggestionOnNoItems,
+} from '../HomeRoute/styledComponents'
 import ThemeContext from '../../Context/ThemeContext'
 
 /* const tempData = {
@@ -30,101 +35,46 @@ import ThemeContext from '../../Context/ThemeContext'
   viewCount: '1.4K',
 } */
 
-const apiStatusConstants = {
-  initial: 'INITIAL',
-  success: 'SUCCESS',
-  failure: 'FAILURE',
-  inProgress: 'IN_PROGRESS',
-}
-
-class TrendingRoute extends Component {
-  state = {
-    trendingVideos: [],
-  }
-
-  componentDidMount() {
-    this.getTrendingVideos()
-  }
-
-  changeChannelObj = channel => ({
-    name: channel.name,
-    profileImageUrl: channel.profile_image_url,
-  })
-
-  changeToCamelCase = item => ({
-    id: item.id,
-    title: item.title,
-    thumbnailUrl: item.thumbnail_url,
-    channel: this.changeChannelObj(item.channel),
-    viewCount: item.view_count,
-    publishedAt: item.published_at,
-  })
-
-  getTrendingVideos = async () => {
-    this.setState({apiStatus: apiStatusConstants.inProgress})
-    const jwtToken = Cookies.get('jwt_token')
-    const apiUrl = `https://apis.ccbp.in/videos/trending`
-    const options = {
-      headers: {
-        Authorization: `Bearer ${jwtToken}`,
-      },
-      method: 'GET',
-    }
-    const response = await fetch(apiUrl, options)
-    if (response.ok) {
-      const fetchedData = await response.json()
-      const updatedData = fetchedData.videos.map(item =>
-        this.changeToCamelCase(item),
+class SavedRoute extends Component {
+  successView = (isDark, savedVideos) => {
+    if (savedVideos.length === 0) {
+      return (
+        <>
+          <NoSearchImg
+            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png"
+            alt="no saved videos"
+          />
+          <NotFoundHeading isDark={isDark}>
+            No saved Videos found
+          </NotFoundHeading>
+          <SuggestionOnNoItems>
+            You can save your videos while watching them
+          </SuggestionOnNoItems>
+        </>
       )
-      this.setState(
-        {
-          trendingVideos: updatedData,
-          apiStatus: apiStatusConstants.success,
-        },
-        console.log(updatedData),
-      )
-    } else {
-      this.setState({apiStatus: apiStatusConstants.failure})
     }
+    return (
+      <>
+        {savedVideos.map(eachItem => (
+          <TrendingCard data={eachItem} key={eachItem.id} isDark={isDark} />
+        ))}
+      </>
+    )
   }
+
+  loadingView = () => (
+    <div data-testid="loader">
+      <Loader type="ThreeDots" color="blue" height="50" width="50" />
+    </div>
+  )
+
+  failureView = () => <h1>FailureView</h1>
 
   render() {
     return (
       <ThemeContext.Consumer>
         {value => {
-          const {isDark} = value
-          const successView = () => {
-            const {trendingVideos} = this.state
-            return (
-              <>
-                {trendingVideos.map(eachItem => (
-                  <TrendingCard
-                    data={eachItem}
-                    key={eachItem.id}
-                    isDark={isDark}
-                  />
-                ))}
-              </>
-            )
-          }
-          const loadingView = () => (
-            <div data-testid="loader">
-              <Loader type="ThreeDots" color="blue" height="50" width="50" />
-            </div>
-          )
-          const failureView = () => <h1>FailureView</h1>
-          const renderSuitableView = () => {
-            const {apiStatus} = this.state
-            switch (apiStatus) {
-              case apiStatusConstants.inProgress:
-                return loadingView()
-              case apiStatusConstants.success:
-                return successView()
-              default:
-                return failureView()
-            }
-          }
-
+          const {isDark, savedVideos} = value
           return (
             <>
               <Header />
@@ -138,7 +88,7 @@ class TrendingRoute extends Component {
                     <Heading>Saved Videos</Heading>
                   </TrendingHeadingHolder>
                   <TrendingHolder isDark={isDark}>
-                    {renderSuitableView()}
+                    {this.successView(isDark, savedVideos)}
                   </TrendingHolder>
                 </TempDiv>
               </TrendingContainer>
@@ -150,4 +100,4 @@ class TrendingRoute extends Component {
   }
 }
 
-export default TrendingRoute
+export default SavedRoute

@@ -28,6 +28,7 @@ class App extends Component {
         value={{
           isDark,
           activeTabId,
+          savedVideos: [],
           toggleTheme: this.toggleTheme,
           changeTab: this.changeTab,
         }}

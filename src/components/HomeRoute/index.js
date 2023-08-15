@@ -22,6 +22,9 @@ import {
   SuccessContainer,
   LoaderContainer,
   NoSearchImg,
+  NotFoundHeading,
+  SuggestionOnNoItems,
+  RetryButton,
 } from './styledComponents'
 import ThemeContext from '../../Context/ThemeContext'
 
@@ -73,15 +76,15 @@ class HomeRoute extends Component {
     }
   }
 
-  renderSuitableView = () => {
+  renderSuitableView = isDark => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.inProgress:
         return this.loadingView()
       case apiStatusConstants.success:
-        return this.successView()
+        return this.successView(isDark)
       default:
-        return this.failureView()
+        return this.failureView(isDark)
     }
   }
 
@@ -91,7 +94,7 @@ class HomeRoute extends Component {
     </LoaderContainer>
   )
 
-  successView = () => {
+  successView = isDark => {
     const {videosList} = this.state
     if (videosList.length === 0) {
       return (
@@ -100,6 +103,15 @@ class HomeRoute extends Component {
             src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
             alt="no videos"
           />
+          <NotFoundHeading isDark={isDark}>
+            No Search results found
+          </NotFoundHeading>
+          <SuggestionOnNoItems>
+            Try different key words or remove search filter
+          </SuggestionOnNoItems>
+          <RetryButton type="button" onClick={this.getVideos}>
+            Retry
+          </RetryButton>
         </>
       )
     }
@@ -112,7 +124,27 @@ class HomeRoute extends Component {
     )
   }
 
-  failureView = () => <h1>FailureView</h1>
+  failureView = isDark => (
+    <>
+      <NoSearchImg
+        src={
+          isDark
+            ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
+            : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
+        }
+        alt="no videos"
+      />
+      <NotFoundHeading isDark={isDark}>
+        Oops! Something Went Wrong
+      </NotFoundHeading>
+      <SuggestionOnNoItems>
+        We are having some trouble to complete your request. Please try again.
+      </SuggestionOnNoItems>
+      <RetryButton type="button" onClick={this.getVideos}>
+        Retry
+      </RetryButton>
+    </>
+  )
 
   onChangeSearchInput = event =>
     this.setState({searchValue: event.target.value})
@@ -178,7 +210,7 @@ class HomeRoute extends Component {
                     </SearchBarHolder>
                   </TaleContainer>
 
-                  {this.renderSuitableView()}
+                  {this.renderSuitableView(isDark)}
                 </RemainContainer>
               </HomeContainer>
             </>

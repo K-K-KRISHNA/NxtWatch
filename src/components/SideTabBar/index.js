@@ -1,12 +1,6 @@
 import {Link} from 'react-router-dom'
-import {
-  AiFillHome,
-  AiFillFire,
-  AiOutlinePlus,
-  AiFillTwitterCircle,
-  AiFillFacebook,
-} from 'react-icons/ai'
-import {ImLinkedin} from 'react-icons/im'
+import {AiFillHome, AiFillFire, AiOutlinePlus} from 'react-icons/ai'
+
 import {SiYoutubegaming} from 'react-icons/si'
 import ThemeContext from '../../Context/ThemeContext'
 import {

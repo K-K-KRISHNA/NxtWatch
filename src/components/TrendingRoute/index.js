@@ -13,6 +13,14 @@ import {
   TempDiv,
   IconHolder,
 } from './styledComponents'
+
+import {
+  NoSearchImg,
+  NotFoundHeading,
+  SuggestionOnNoItems,
+  RetryButton,
+} from '../HomeRoute/styledComponents'
+
 import ThemeContext from '../../Context/ThemeContext'
 
 /* const tempData = {
@@ -88,43 +96,62 @@ class TrendingRoute extends Component {
     }
   }
 
+  successView = isDark => {
+    const {trendingVideos} = this.state
+    return (
+      <>
+        {trendingVideos.map(eachItem => (
+          <TrendingCard data={eachItem} key={eachItem.id} isDark={isDark} />
+        ))}
+      </>
+    )
+  }
+
+  loadingView = () => (
+    <div data-testid="loader">
+      <Loader type="ThreeDots" color="blue" height="50" width="50" />
+    </div>
+  )
+
+  failureView = isDark => (
+    <>
+      <NoSearchImg
+        src={
+          isDark
+            ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
+            : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
+        }
+        alt="no videos"
+      />
+      <NotFoundHeading isDark={isDark}>
+        Oops! Something Went Wrong
+      </NotFoundHeading>
+      <SuggestionOnNoItems>
+        We are having some trouble to complete your request. Please try again.
+      </SuggestionOnNoItems>
+      <RetryButton type="button" onClick={this.getTrendingVideos}>
+        Retry
+      </RetryButton>
+    </>
+  )
+
+  renderSuitableView = isDark => {
+    const {apiStatus} = this.state
+    switch (apiStatus) {
+      case apiStatusConstants.inProgress:
+        return this.loadingView()
+      case apiStatusConstants.success:
+        return this.successView(isDark)
+      default:
+        return this.failureView(isDark)
+    }
+  }
+
   render() {
     return (
       <ThemeContext.Consumer>
         {value => {
           const {isDark} = value
-          const successView = () => {
-            const {trendingVideos} = this.state
-            return (
-              <>
-                {trendingVideos.map(eachItem => (
-                  <TrendingCard
-                    data={eachItem}
-                    key={eachItem.id}
-                    isDark={isDark}
-                  />
-                ))}
-              </>
-            )
-          }
-          const loadingView = () => (
-            <div data-testid="loader">
-              <Loader type="ThreeDots" color="blue" height="50" width="50" />
-            </div>
-          )
-          const failureView = () => <h1>FailureView</h1>
-          const renderSuitableView = () => {
-            const {apiStatus} = this.state
-            switch (apiStatus) {
-              case apiStatusConstants.inProgress:
-                return loadingView()
-              case apiStatusConstants.success:
-                return successView()
-              default:
-                return failureView()
-            }
-          }
-
           return (
             <>
               <Header />
@@ -138,7 +165,7 @@ class TrendingRoute extends Component {
                     <Heading>Trending</Heading>
                   </TrendingHeadingHolder>
                   <TrendingHolder isDark={isDark}>
-                    {renderSuitableView()}
+                    {this.renderSuitableView(isDark)}
                   </TrendingHolder>
                 </TempDiv>
               </TrendingContainer>

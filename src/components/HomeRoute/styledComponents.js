@@ -98,11 +98,26 @@ export const RetryButton = styled.button`
   background-color: #4f46e5;
   color: white;
   text-align: center;
+  cursor: pointer;
   padding: 10px;
   border-width: 0px;
   border-radius: 5px;
+  width: 100px;
+  margin-top: 20px;
+  align-self: center;
 `
 export const H1 = styled.h2`
   color: ${props => (props.isDark ? 'white' : 'black')};
   text-align: center;
+`
+export const NotFoundHeading = styled.h1`
+  color: ${props => (props.isDark ? 'white' : 'black')};
+  align-self: center;
+`
+
+export const SuggestionOnNoItems = styled.p`
+  color: gray;
+  align-self: center;
+  margin: 0px;
+  font-weight: bold;
 `
