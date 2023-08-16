@@ -1,3 +1,4 @@
+import {formatDistanceToNow} from 'date-fns'
 import {
   CardContainer,
   Thumbnail,
@@ -6,9 +7,15 @@ import {
   ChannelName,
 } from './styledComponents'
 
+const calculateSpan = date => {
+  const tempString = formatDistanceToNow(new Date(date))
+  const words = tempString.split(' ')
+  return words[1]
+}
+
 const TrendingCard = props => {
   const {data, isDark} = props
-  const {channel, thumbnailUrl, title, viewCount} = data
+  const {channel, thumbnailUrl, title, viewCount, publishedAt} = data
   const {name} = channel
   return (
     <CardContainer isDark={isDark}>
@@ -16,7 +23,9 @@ const TrendingCard = props => {
       <DescriptionContainer>
         <TitleHead>{title}</TitleHead>
         <ChannelName>{name}</ChannelName>
-        <ChannelName>{`${viewCount} views * 2 Years Ago `}</ChannelName>
+        <ChannelName>{`${viewCount} views . ${calculateSpan(
+          publishedAt,
+        )} years ago`}</ChannelName>
       </DescriptionContainer>
     </CardContainer>
   )

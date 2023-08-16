@@ -1,10 +1,12 @@
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import {Component} from 'react'
 import {AiOutlinePlus} from 'react-icons/ai'
+import {formatDistanceToNow} from 'date-fns'
 import Header from '../Header'
 import SideTabBar from '../SideTabBar'
 import TrendingCard from '../TrendingCard'
+
 import {
   TrendingContainer,
   TrendingHolder,
@@ -20,7 +22,7 @@ import {
 } from '../HomeRoute/styledComponents'
 import ThemeContext from '../../Context/ThemeContext'
 
-/* const tempData = {
+const tempData = {
   channel: {
     name: 'iB Cricket',
     profileImageUrl:
@@ -33,10 +35,11 @@ import ThemeContext from '../../Context/ThemeContext'
   title:
     'Sehwag shares his batting experience in iB Cricket | iB Cricket Super Over League',
   viewCount: '1.4K',
-} */
+}
 
 class SavedRoute extends Component {
   successView = (isDark, savedVideos) => {
+    console.log(formatDistanceToNow(new Date(tempData.publishedAt)))
     if (savedVideos.length === 0) {
       return (
         <>

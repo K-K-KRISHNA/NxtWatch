@@ -1,3 +1,4 @@
+import {formatDistanceToNow} from 'date-fns'
 import ThemeContext from '../../Context/ThemeContext'
 import {
   Container,
@@ -10,9 +11,15 @@ import {
   Views,
 } from './styledComponents'
 
+const calculateSpan = date => {
+  const tempString = formatDistanceToNow(new Date(date))
+  const words = tempString.split(' ')
+  return words[1]
+}
+
 const EachCard = props => {
   const {data} = props
-  const {channel, thumbnailUrl, title, viewCount} = data
+  const {channel, thumbnailUrl, title, viewCount, publishedAt} = data
   const {name, profileImageUrl} = channel
   return (
     <ThemeContext.Consumer>
@@ -27,7 +34,9 @@ const EachCard = props => {
               <DetailsContainer>
                 <TitlePara isDark={isDark}>{title}</TitlePara>
                 <ChannelNamePara>{name}</ChannelNamePara>
-                <Views>{`${viewCount} views . 2 years ago`}</Views>
+                <Views>{`${viewCount} views . ${calculateSpan(
+                  publishedAt,
+                )} years ago`}</Views>
               </DetailsContainer>
             </ChannelContainer>
           </Container>
