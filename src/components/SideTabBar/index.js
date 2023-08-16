@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom'
-import {AiFillHome, AiFillFire, AiOutlinePlus} from 'react-icons/ai'
+import {AiFillHome, AiFillFire} from 'react-icons/ai'
+import {BiListPlus} from 'react-icons/bi'
 
 import {SiYoutubegaming} from 'react-icons/si'
 import ThemeContext from '../../Context/ThemeContext'
@@ -24,7 +25,7 @@ const TabList = [
   {
     id: 4,
     tab: 'Saved videos',
-    icon: <AiOutlinePlus size="25" />,
+    icon: <BiListPlus size="25" />,
     path: '/saved-videos',
   },
 ]

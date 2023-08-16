@@ -96,12 +96,17 @@ class TrendingRoute extends Component {
     }
   }
 
-  successView = isDark => {
+  successView = (isDark, changeTab) => {
     const {trendingVideos} = this.state
     return (
       <>
         {trendingVideos.map(eachItem => (
-          <TrendingCard data={eachItem} key={eachItem.id} isDark={isDark} />
+          <TrendingCard
+            data={eachItem}
+            key={eachItem.id}
+            isDark={isDark}
+            changeTab={changeTab}
+          />
         ))}
       </>
     )
@@ -135,13 +140,13 @@ class TrendingRoute extends Component {
     </>
   )
 
-  renderSuitableView = isDark => {
+  renderSuitableView = (isDark, changeTab) => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.inProgress:
         return this.loadingView()
       case apiStatusConstants.success:
-        return this.successView(isDark)
+        return this.successView(isDark, changeTab)
       default:
         return this.failureView(isDark)
     }
@@ -151,7 +156,7 @@ class TrendingRoute extends Component {
     return (
       <ThemeContext.Consumer>
         {value => {
-          const {isDark} = value
+          const {isDark, changeTab} = value
           return (
             <>
               <Header />
@@ -165,7 +170,7 @@ class TrendingRoute extends Component {
                     <Heading>Trending</Heading>
                   </TrendingHeadingHolder>
                   <TrendingHolder isDark={isDark}>
-                    {this.renderSuitableView(isDark)}
+                    {this.renderSuitableView(isDark, changeTab)}
                   </TrendingHolder>
                 </TempDiv>
               </TrendingContainer>

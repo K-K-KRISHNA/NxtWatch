@@ -10,6 +10,7 @@ import GamingRoute from './components/GamingRoute'
 import SavedRoute from './components/SavedRoute'
 // import SideTabBar from './components/SideTabBar'
 import './App.css'
+import VideoDetails from './components/VideoDetails'
 // Replace your code here
 class App extends Component {
   state = {
@@ -38,6 +39,7 @@ class App extends Component {
           <ProtectedRoute exact path="/trending" component={TrendingRoute} />
           <ProtectedRoute exact path="/gaming" component={GamingRoute} />
           <ProtectedRoute exact path="/saved-videos" component={SavedRoute} />
+          <ProtectedRoute exact path="/videos/:id" component={VideoDetails} />
           <Route exact path="/login" component={LoginRoute} />
           <Route component={NotFoundRoute} />
         </Switch>

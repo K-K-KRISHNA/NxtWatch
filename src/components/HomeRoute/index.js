@@ -76,13 +76,13 @@ class HomeRoute extends Component {
     }
   }
 
-  renderSuitableView = isDark => {
+  renderSuitableView = (isDark, changeTab) => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.inProgress:
         return this.loadingView()
       case apiStatusConstants.success:
-        return this.successView(isDark)
+        return this.successView(isDark, changeTab)
       default:
         return this.failureView(isDark)
     }
@@ -94,7 +94,7 @@ class HomeRoute extends Component {
     </LoaderContainer>
   )
 
-  successView = isDark => {
+  successView = (isDark, changeTab) => {
     const {videosList} = this.state
     if (videosList.length === 0) {
       return (
@@ -118,7 +118,7 @@ class HomeRoute extends Component {
     return (
       <SuccessContainer>
         {videosList.map(eachData => (
-          <EachCard data={eachData} key={eachData.id} />
+          <EachCard data={eachData} key={eachData.id} changeTab={changeTab} />
         ))}
       </SuccessContainer>
     )
@@ -171,7 +171,7 @@ class HomeRoute extends Component {
     return (
       <ThemeContext.Consumer>
         {value => {
-          const {isDark} = value
+          const {isDark, changeTab} = value
           return (
             <>
               <Header />
@@ -210,7 +210,7 @@ class HomeRoute extends Component {
                     </SearchBarHolder>
                   </TaleContainer>
 
-                  {this.renderSuitableView(isDark)}
+                  {this.renderSuitableView(isDark, changeTab)}
                 </RemainContainer>
               </HomeContainer>
             </>

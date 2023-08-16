@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import {formatDistanceToNow} from 'date-fns'
 import ThemeContext from '../../Context/ThemeContext'
 import {
@@ -18,8 +19,11 @@ const calculateSpan = date => {
 }
 
 const EachCard = props => {
-  const {data} = props
-  const {channel, thumbnailUrl, title, viewCount, publishedAt} = data
+  const {data, changeTab} = props
+  const removeTab = () => {
+    changeTab('kk')
+  }
+  const {channel, thumbnailUrl, title, viewCount, publishedAt, id} = data
   const {name, profileImageUrl} = channel
   return (
     <ThemeContext.Consumer>
@@ -27,19 +31,21 @@ const EachCard = props => {
         const {isDark} = value
         console.log(isDark)
         return (
-          <Container>
-            <ThumbnailImage src={thumbnailUrl} alt="video thumbnail" />
-            <ChannelContainer>
-              <ProfilePic src={profileImageUrl} alt="channel logo" />
-              <DetailsContainer>
-                <TitlePara isDark={isDark}>{title}</TitlePara>
-                <ChannelNamePara>{name}</ChannelNamePara>
-                <Views>{`${viewCount} views . ${calculateSpan(
-                  publishedAt,
-                )} years ago`}</Views>
-              </DetailsContainer>
-            </ChannelContainer>
-          </Container>
+          <Link to={`/videos/${id}`} style={{textDecoration: 'none'}}>
+            <Container onClick={removeTab}>
+              <ThumbnailImage src={thumbnailUrl} alt="video thumbnail" />
+              <ChannelContainer>
+                <ProfilePic src={profileImageUrl} alt="channel logo" />
+                <DetailsContainer>
+                  <TitlePara isDark={isDark}>{title}</TitlePara>
+                  <ChannelNamePara>{name}</ChannelNamePara>
+                  <Views>{`${viewCount} views . ${calculateSpan(
+                    publishedAt,
+                  )} years ago`}</Views>
+                </DetailsContainer>
+              </ChannelContainer>
+            </Container>
+          </Link>
         )
       }}
     </ThemeContext.Consumer>

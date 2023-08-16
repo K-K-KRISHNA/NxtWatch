@@ -72,7 +72,7 @@ class GamingRoute extends Component {
     return (
       <ThemeContext.Consumer>
         {value => {
-          const {isDark} = value
+          const {isDark, changeTab} = value
           const successView = () => {
             const {videosList} = this.state
             return (
@@ -82,6 +82,7 @@ class GamingRoute extends Component {
                     data={eachItem}
                     key={eachItem.id}
                     isDark={isDark}
+                    changeTab={changeTab}
                   />
                 ))}
               </>

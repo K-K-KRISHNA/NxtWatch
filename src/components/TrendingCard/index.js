@@ -1,4 +1,5 @@
 import {formatDistanceToNow} from 'date-fns'
+import {Link} from 'react-router-dom'
 import {
   CardContainer,
   Thumbnail,
@@ -14,20 +15,26 @@ const calculateSpan = date => {
 }
 
 const TrendingCard = props => {
-  const {data, isDark} = props
-  const {channel, thumbnailUrl, title, viewCount, publishedAt} = data
+  const {data, isDark, changeTab} = props
+
+  const {channel, thumbnailUrl, title, viewCount, publishedAt, id} = data
   const {name} = channel
   return (
-    <CardContainer isDark={isDark}>
-      <Thumbnail src={thumbnailUrl} alt="video thumbnail" />
-      <DescriptionContainer>
-        <TitleHead>{title}</TitleHead>
-        <ChannelName>{name}</ChannelName>
-        <ChannelName>{`${viewCount} views . ${calculateSpan(
-          publishedAt,
-        )} years ago`}</ChannelName>
-      </DescriptionContainer>
-    </CardContainer>
+    <Link
+      to={`/videos/${id}`}
+      style={{textDecoration: 'none', color: isDark ? 'white' : 'black'}}
+    >
+      <CardContainer isDark={isDark} onClick={changeTab}>
+        <Thumbnail src={thumbnailUrl} alt="video thumbnail" />
+        <DescriptionContainer>
+          <TitleHead>{title}</TitleHead>
+          <ChannelName>{name}</ChannelName>
+          <ChannelName>{`${viewCount} views . ${calculateSpan(
+            publishedAt,
+          )} years ago`}</ChannelName>
+        </DescriptionContainer>
+      </CardContainer>
+    </Link>
   )
 }
 

@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import {
   CardContainer,
   Thumbnail,
@@ -6,14 +7,19 @@ import {
 } from './styledComponents'
 
 const GamingCard = props => {
-  const {data, isDark} = props
-  const {thumbnailUrl, title, viewCount} = data
+  const {data, isDark, changeTab} = props
+  const {thumbnailUrl, title, viewCount, id} = data
   return (
-    <CardContainer isDark={isDark}>
-      <Thumbnail src={thumbnailUrl} alt="video thumbnail" />
-      <TitleHead>{title}</TitleHead>
-      <ChannelName>{`${viewCount} Watching World Wide `}</ChannelName>
-    </CardContainer>
+    <Link
+      to={`/videos/${id}`}
+      style={{textDecoration: 'none', color: isDark ? 'white' : 'black'}}
+    >
+      <CardContainer isDark={isDark} onClick={changeTab}>
+        <Thumbnail src={thumbnailUrl} alt="video thumbnail" />
+        <TitleHead>{title}</TitleHead>
+        <ChannelName>{`${viewCount} Watching World Wide `}</ChannelName>
+      </CardContainer>
+    </Link>
   )
 }
 

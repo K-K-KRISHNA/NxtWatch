@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: 5px;
+  text-decoration: none;
 `
 export const ThumbnailImage = styled.img`
   width: 330px;
