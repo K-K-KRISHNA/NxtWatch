@@ -7,6 +7,13 @@ import SideTabBar from '../SideTabBar'
 import GamingCard from '../GamingCard'
 
 import {
+  NoSearchImg,
+  NotFoundHeading,
+  SuggestionOnNoItems,
+  RetryButton,
+} from '../HomeRoute/styledComponents'
+
+import {
   GamingContainer,
   GamingHolder,
   GamingHeadingHolder,
@@ -94,7 +101,29 @@ class GamingRoute extends Component {
               <Loader type="ThreeDots" color="blue" height="50" width="50" />
             </div>
           )
-          const failureView = () => <h1>FailureView</h1>
+          const failureView = () => (
+            <>
+              <NoSearchImg
+                src={
+                  isDark
+                    ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
+                    : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
+                }
+                alt="failure view"
+              />
+              <NotFoundHeading isDark={isDark}>
+                Oops! Something Went Wrong
+              </NotFoundHeading>
+              <SuggestionOnNoItems>
+                We are having some trouble to complete your request. Please try
+                again.
+              </SuggestionOnNoItems>
+              <RetryButton type="button" onClick={this.getGamingVideos}>
+                Retry
+              </RetryButton>
+            </>
+          )
+
           const renderSuitableView = () => {
             const {apiStatus} = this.state
             switch (apiStatus) {

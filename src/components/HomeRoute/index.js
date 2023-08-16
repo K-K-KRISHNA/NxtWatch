@@ -132,7 +132,7 @@ class HomeRoute extends Component {
             ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
             : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
         }
-        alt="no videos"
+        alt="failure view"
       />
       <NotFoundHeading isDark={isDark}>
         Oops! Something Went Wrong
@@ -179,18 +179,18 @@ class HomeRoute extends Component {
                 <SideTabBar />
                 <RemainContainer isDark={isDark}>
                   {isBanner && (
-                    <Banner>
+                    <Banner data-testid="banner">
                       <PremiumSection>
                         <Logo
                           src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                          alt="website logo"
+                          alt="nxt watch logo"
                         />
                         <Tagline>
                           Buy Nxt Watch Premium prepaid plans with UPI
                         </Tagline>
                         <GetitNowButton>GET IT NOW</GetitNowButton>
                       </PremiumSection>
-                      <CrossButton>
+                      <CrossButton data-testid="close">
                         <AiOutlineClose size="20" onClick={this.closeBanner} />
                       </CrossButton>
                     </Banner>
@@ -203,6 +203,7 @@ class HomeRoute extends Component {
                         isDark={isDark}
                         onChange={this.onChangeSearchInput}
                         value={searchValue}
+                        data-testid="searchButton"
                       />
                       <Magnifier onClick={this.getVideos}>
                         <AiOutlineSearch />

@@ -14,7 +14,7 @@ export const DescriptionContainer = styled.div`
   margin-left: 25px;
   justify-content: flex-start;
 `
-export const TitleHead = styled.h3`
+export const TitleHead = styled.p`
   font-weight: normal;
   margin-top: 0px;
   padding-top: 0px;

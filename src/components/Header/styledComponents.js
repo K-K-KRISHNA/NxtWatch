@@ -18,8 +18,13 @@ export const RightHeaderContainer = styled.div`
   justify-content: space-around;
   width: 300px;
 `
-export const ModeContainer = styled.div`
+export const ModeContainer = styled.button`
   color: ${props => props.iconColor};
   cursor: pointer;
   align-self: center;
+  background-color: transparent;
+  border-width: 0px;
+`
+export const ProfileImage = styled.img`
+  width: 50px;
 `

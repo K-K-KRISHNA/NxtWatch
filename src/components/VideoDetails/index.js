@@ -28,6 +28,7 @@ import {
   ChannelName,
   GrayPara,
   DescriptionOfVideo,
+  IconButton,
 } from './styledComponents'
 import ThemeContext from '../../Context/ThemeContext'
 
@@ -136,15 +137,15 @@ class VideoDetails extends Component {
           <UserResponses>
             <IconHolder>
               <BiLike size={20} />
-              <p>Like</p>
+              <IconButton>Like</IconButton>
             </IconHolder>
             <IconHolder>
               <BiDislike size={20} />
-              <p>DisLike</p>
+              <IconButton>DisLike</IconButton>
             </IconHolder>
             <IconHolder>
               <BiListPlus size={30} />
-              <p>Save</p>
+              <IconButton>Save</IconButton>
             </IconHolder>
           </UserResponses>
         </ControlsBar>
@@ -169,7 +170,7 @@ class VideoDetails extends Component {
             ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
             : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
         }
-        alt="no videos"
+        alt="failure view"
       />
       <NotFoundHeading isDark={isDark}>
         Oops! Something Went Wrong

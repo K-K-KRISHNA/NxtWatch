@@ -6,7 +6,7 @@ export const VideoContainer = styled.div`
   min-height: 100vh;
   padding: 30px;
 `
-export const TitleHeading = styled.h2``
+export const TitleHeading = styled.p``
 export const ControlsBar = styled.div`
   display: flex;
   justify-content: space-between;
@@ -49,4 +49,9 @@ export const GrayPara = styled.p`
 export const DescriptionOfVideo = styled.p`
   font-size: 25px;
   margin-left: 100px;
+`
+export const IconButton = styled.button`
+  background-color: transparent;
+  border-width: 0px;
+  cursor: pointer;
 `

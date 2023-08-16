@@ -126,7 +126,7 @@ class TrendingRoute extends Component {
             ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
             : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
         }
-        alt="no videos"
+        alt="failure view"
       />
       <NotFoundHeading isDark={isDark}>
         Oops! Something Went Wrong

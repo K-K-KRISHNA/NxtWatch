@@ -2,7 +2,7 @@
 import {withRouter, Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import {BiSun} from 'react-icons/bi'
-import {FaMoon, FaUserCircle} from 'react-icons/fa'
+import {FaMoon} from 'react-icons/fa'
 
 import {Component} from 'react'
 import ThemeContext from '../../Context/ThemeContext'
@@ -13,6 +13,7 @@ import {
   LogoIcon,
   RightHeaderContainer,
   ModeContainer,
+  ProfileImage,
 } from './styledComponents'
 
 class Header extends Component {
@@ -47,10 +48,17 @@ class Header extends Component {
                 />
               </Link>
               <RightHeaderContainer>
-                <ModeContainer iconColor={iconColor} onClick={toggleMode}>
+                <ModeContainer
+                  iconColor={iconColor}
+                  onClick={toggleMode}
+                  data-testid="theme"
+                >
                   {isDark ? <BiSun size="40" /> : <FaMoon size="40" />}
                 </ModeContainer>
-                <FaUserCircle size="50" color="#94a3b8" />
+                <ProfileImage
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
+                  alt="profile"
+                />
                 <LogoutPopup onClickLogout={this.onClickLogout} />
               </RightHeaderContainer>
             </HeaderContainer>
