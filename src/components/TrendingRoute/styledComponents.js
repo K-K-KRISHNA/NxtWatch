@@ -4,13 +4,13 @@ export const TrendingContainer = styled.div`
   display: flex;
   flex-direction: row;
 `
-export const TrendingHolder = styled.div`
+export const TrendingHolder = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 75vw;
   min-height: 90vh;
-  background-color: ${props => (props.isDark ? 'black' : '#f4f4f4')};
+  background-color: ${props => (props.isDark ? '#0f0f0f' : '#f4f4f4')};
   color: ${props => (props.isDark ? 'white' : 'black')};
   padding: 30px;
   margin: 0px;

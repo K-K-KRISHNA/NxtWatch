@@ -9,7 +9,7 @@ export const RemainContainer = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 0px;
-  background-color: ${props => (props.isDark ? 'black' : '#f4f4f4')};
+  background-color: ${props => (props.isDark ? '#0f0f0f' : '#f4f4f4')};
 `
 export const Banner = styled.div`
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');

@@ -148,7 +148,7 @@ class GamingRoute extends Component {
                     </IconHolder>
                     <Heading>Gaming</Heading>
                   </GamingHeadingHolder>
-                  <GamingHolder isDark={isDark}>
+                  <GamingHolder isDark={isDark} data-testid="gaming">
                     {renderSuitableView()}
                   </GamingHolder>
                 </TempDiv>

@@ -169,7 +169,7 @@ class TrendingRoute extends Component {
                     </IconHolder>
                     <Heading>Trending</Heading>
                   </TrendingHeadingHolder>
-                  <TrendingHolder isDark={isDark}>
+                  <TrendingHolder isDark={isDark} data-testid="trending">
                     {this.renderSuitableView(isDark, changeTab)}
                   </TrendingHolder>
                 </TempDiv>

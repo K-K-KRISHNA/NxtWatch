@@ -14,13 +14,14 @@ import {
   RightHeaderContainer,
   ModeContainer,
   ProfileImage,
+  NavContainer,
 } from './styledComponents'
 
 class Header extends Component {
   onClickLogout = () => {
     const {history} = this.props
     Cookies.remove('jwt_token')
-    history.replace('/')
+    history.replace('/login')
   }
 
   render() {
@@ -35,32 +36,34 @@ class Header extends Component {
             ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
             : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
 
-          const bgColor = isDark ? '#212121' : 'white'
-          const iconColor = !isDark ? '#212121' : 'white'
+          const bgColor = isDark ? '#181818' : 'white'
+          const iconColor = !isDark ? '#181818' : 'white'
           //
           return (
             <HeaderContainer backgroundColor={bgColor}>
-              <Link to="/">
-                <LogoIcon
-                  onClick={() => changeTab('Home')}
-                  src={iconUrl}
-                  alt="website logo"
-                />
-              </Link>
-              <RightHeaderContainer>
-                <ModeContainer
-                  iconColor={iconColor}
-                  onClick={toggleMode}
-                  data-testid="theme"
-                >
-                  {isDark ? <BiSun size="40" /> : <FaMoon size="40" />}
-                </ModeContainer>
-                <ProfileImage
-                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
-                  alt="profile"
-                />
-                <LogoutPopup onClickLogout={this.onClickLogout} />
-              </RightHeaderContainer>
+              <NavContainer>
+                <Link to="/">
+                  <LogoIcon
+                    onClick={() => changeTab('Home')}
+                    src={iconUrl}
+                    alt="website logo"
+                  />
+                </Link>
+                <RightHeaderContainer>
+                  <ModeContainer
+                    iconColor={iconColor}
+                    onClick={toggleMode}
+                    data-testid="theme"
+                  >
+                    {isDark ? <BiSun size="40" /> : <FaMoon size="40" />}
+                  </ModeContainer>
+                  <ProfileImage
+                    src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
+                    alt="profile"
+                  />
+                  <LogoutPopup onClickLogout={this.onClickLogout} />
+                </RightHeaderContainer>
+              </NavContainer>
             </HeaderContainer>
           )
         }}

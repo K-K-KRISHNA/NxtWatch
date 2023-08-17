@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.li`
   display: flex;
   margin-top: 20px;
   margin: 25px;
@@ -10,7 +10,7 @@ export const Thumbnail = styled.img`
   width: 200px;
 `
 
-export const TitleHead = styled.h3`
+export const TitleHead = styled.p`
   font-weight: normal;
   margin: 0px;
   padding-top: 0px;

@@ -115,7 +115,7 @@ class VideoDetails extends Component {
     return words[1]
   }
 
-  successView = (isDark, changeTab) => {
+  successView = isDark => {
     const {video} = this.state
     const {
       videoUrl,
@@ -197,7 +197,7 @@ class VideoDetails extends Component {
               <Header />
               <HomeContainer>
                 <SideTabBar />
-                <RemainContainer isDark={isDark}>
+                <RemainContainer isDark={isDark} data-testid="videoItemDetails">
                   {this.renderSuitableView(isDark)}
                 </RemainContainer>
               </HomeContainer>

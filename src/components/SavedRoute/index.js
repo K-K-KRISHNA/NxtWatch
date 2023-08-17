@@ -90,7 +90,7 @@ class SavedRoute extends Component {
                     </IconHolder>
                     <Heading>Saved Videos</Heading>
                   </TrendingHeadingHolder>
-                  <TrendingHolder isDark={isDark}>
+                  <TrendingHolder isDark={isDark} data-testid="savedVideos">
                     {this.successView(isDark, savedVideos)}
                   </TrendingHolder>
                 </TempDiv>

@@ -177,7 +177,7 @@ class HomeRoute extends Component {
               <Header />
               <HomeContainer>
                 <SideTabBar />
-                <RemainContainer isDark={isDark}>
+                <RemainContainer isDark={isDark} data-testid="home">
                   {isBanner && (
                     <Banner data-testid="banner">
                       <PremiumSection>
@@ -190,7 +190,7 @@ class HomeRoute extends Component {
                         </Tagline>
                         <GetitNowButton>GET IT NOW</GetitNowButton>
                       </PremiumSection>
-                      <CrossButton data-testid="close">
+                      <CrossButton type="button" data-testid="close">
                         <AiOutlineClose size="20" onClick={this.closeBanner} />
                       </CrossButton>
                     </Banner>
@@ -203,9 +203,12 @@ class HomeRoute extends Component {
                         isDark={isDark}
                         onChange={this.onChangeSearchInput}
                         value={searchValue}
-                        data-testid="searchButton"
                       />
-                      <Magnifier onClick={this.getVideos}>
+                      <Magnifier
+                        type="button"
+                        data-testid="searchButton"
+                        onClick={this.getVideos}
+                      >
                         <AiOutlineSearch />
                       </Magnifier>
                     </SearchBarHolder>

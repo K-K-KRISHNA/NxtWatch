@@ -28,3 +28,8 @@ export const ModeContainer = styled.button`
 export const ProfileImage = styled.img`
   width: 50px;
 `
+export const NavContainer = styled.ul`
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+`

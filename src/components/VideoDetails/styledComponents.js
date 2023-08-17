@@ -39,7 +39,7 @@ export const NameContainer = styled.div`
   display: flex;
   flex-direction: column;
 `
-export const ChannelName = styled.h1`
+export const ChannelName = styled.p`
   font-size: 20px;
 `
 export const GrayPara = styled.p`

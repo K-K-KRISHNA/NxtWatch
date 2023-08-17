@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const SideContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${props => (props.isDark ? '#212121' : 'white')};
+  background-color: ${props => (props.isDark ? '#181818' : 'white')};
   justify-content: space-between;
   min-height: 90vh;
   width: 25vw;
