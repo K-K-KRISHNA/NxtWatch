@@ -7,6 +7,8 @@ export const CardContainer = styled.li`
 `
 export const Thumbnail = styled.img`
   width: 60%;
+
+  margin-left: 0px;
 `
 export const DescriptionContainer = styled.div`
   display: flex;

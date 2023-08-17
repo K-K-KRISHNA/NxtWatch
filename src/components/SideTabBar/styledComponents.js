@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
-export const SideContainer = styled.div`
+export const SideContainer = styled.ul`
   display: flex;
   flex-direction: column;
   background-color: ${props => (props.isDark ? '#181818' : 'white')};
   justify-content: space-between;
   min-height: 90vh;
   width: 25vw;
-  padding-top: 30px;
+  padding-top: 0px;
   margin-right: 0px;
   padding-right: 0px;
 `

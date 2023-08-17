@@ -9,7 +9,7 @@ export const RemainContainer = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 0px;
-  background-color: ${props => (props.isDark ? '#0f0f0f' : '#f4f4f4')};
+  background-color: ${props => (props.isDark ? '#181818' : '#f4f4f4')};
 `
 export const Banner = styled.div`
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
@@ -79,7 +79,7 @@ export const Magnifier = styled.button`
   background-color: #909090;
   border-width: 0px;
 `
-export const SuccessContainer = styled.div`
+export const SuccessContainer = styled.ul`
   display: flex;
   padding: 20px;
   width: 75vw;

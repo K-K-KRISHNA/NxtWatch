@@ -190,8 +190,12 @@ class HomeRoute extends Component {
                         </Tagline>
                         <GetitNowButton>GET IT NOW</GetitNowButton>
                       </PremiumSection>
-                      <CrossButton type="button" data-testid="close">
-                        <AiOutlineClose size="20" onClick={this.closeBanner} />
+                      <CrossButton
+                        type="button"
+                        data-testid="close"
+                        onClick={this.closeBanner}
+                      >
+                        <AiOutlineClose size="20" />
                       </CrossButton>
                     </Banner>
                   )}

@@ -14,7 +14,7 @@ import {
   Heading,
   TempDiv,
   IconHolder,
-} from '../TrendingRoute/styledComponents'
+} from './styledComponents'
 import {
   NoSearchImg,
   NotFoundHeading,

@@ -21,18 +21,14 @@ export const UserResponses = styled.div`
   display: flex;
   justify-content: space-around;
 `
-export const IconHolder = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-right: 30px;
-`
 export const ChannelContainer = styled.div`
   display: flex;
   margin-top: 20px;
+  align-items: center;
 `
 export const Logo = styled.img`
   width: 75px;
+  height: 75px;
   margin-right: 20px;
 `
 export const NameContainer = styled.div`
@@ -53,5 +49,15 @@ export const DescriptionOfVideo = styled.p`
 export const IconButton = styled.button`
   background-color: transparent;
   border-width: 0px;
+  color: ${props => (props.check ? '#2563eb' : '#64748b')};
+  align-items: center;
+  display: flex;
   cursor: pointer;
+`
+export const RemainContainer2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0px;
+  background-color: ${props => (props.isDark ? '#0f0f0f' : '#f4f4f4')};
 `

@@ -8,7 +8,6 @@ import Header from '../Header'
 import SideTabBar from '../SideTabBar'
 import {
   HomeContainer,
-  RemainContainer,
   LoaderContainer,
   NotFoundHeading,
   NoSearchImg,
@@ -20,7 +19,6 @@ import {
   TitleHeading,
   ControlsBar,
   Bar,
-  IconHolder,
   UserResponses,
   ChannelContainer,
   Logo,
@@ -29,6 +27,7 @@ import {
   GrayPara,
   DescriptionOfVideo,
   IconButton,
+  RemainContainer2,
 } from './styledComponents'
 import ThemeContext from '../../Context/ThemeContext'
 
@@ -42,6 +41,9 @@ const apiStatusConstants = {
 class VideoDetails extends Component {
   state = {
     video: [],
+    isLiked: false,
+    isDisliked: false,
+    isSaved: false,
     apiStatus: apiStatusConstants.initial,
   }
 
@@ -115,8 +117,24 @@ class VideoDetails extends Component {
     return words[1]
   }
 
+  toggleLiked = () => {
+    const {isLiked, isDisliked} = this.state
+    this.setState({isLiked: !isLiked})
+    if (isDisliked) {
+      this.setState({isDisliked: !isDisliked})
+    }
+  }
+
+  toggleDisiked = () => {
+    const {isLiked, isDisliked} = this.state
+    this.setState({isDisliked: !isDisliked})
+    if (isLiked) {
+      this.setState({isLiked: !isLiked})
+    }
+  }
+
   successView = isDark => {
-    const {video} = this.state
+    const {video, isLiked, isSaved, isDisliked} = this.state
     const {
       videoUrl,
       title,
@@ -127,38 +145,65 @@ class VideoDetails extends Component {
     } = video
     const {profileImageUrl, name, subscriberCount} = channel
     return (
-      <VideoContainer isDark={isDark}>
-        <ReactPlayer url={videoUrl} width="100%" height="600px" />
-        <TitleHeading>{title}</TitleHeading>
-        <ControlsBar>
-          <p>{`${viewCount} views * ${this.calculateSpan(
-            publishedAt,
-          )} years ago`}</p>
-          <UserResponses>
-            <IconHolder>
-              <BiLike size={20} />
-              <IconButton>Like</IconButton>
-            </IconHolder>
-            <IconHolder>
-              <BiDislike size={20} />
-              <IconButton>DisLike</IconButton>
-            </IconHolder>
-            <IconHolder>
-              <BiListPlus size={30} />
-              <IconButton>Save</IconButton>
-            </IconHolder>
-          </UserResponses>
-        </ControlsBar>
-        <Bar />
-        <ChannelContainer>
-          <Logo src={profileImageUrl} alt="channel logo" />
-          <NameContainer>
-            <ChannelName>{name}</ChannelName>
-            <GrayPara>{subscriberCount} subscribers</GrayPara>
-          </NameContainer>
-        </ChannelContainer>
-        <DescriptionOfVideo>{description}</DescriptionOfVideo>
-      </VideoContainer>
+      <ThemeContext.Consumer>
+        {value => {
+          const {addSavedVideo, removeSavedVideo, savedVideos} = value
+          const doopSaved = savedVideos.every(item => item.id !== video.id)
+          const toggleSaved = () => {
+            this.setState({isSaved: !isSaved})
+            if (isSaved) {
+              removeSavedVideo(video.id)
+            } else if (savedVideos.every(item => item.id !== video.id)) {
+              addSavedVideo(video)
+            }
+          }
+
+          return (
+            <VideoContainer isDark={isDark}>
+              <ReactPlayer url={videoUrl} width="100%" height="600px" />
+              <TitleHeading>{title}</TitleHeading>
+              <ControlsBar>
+                <p>{`${viewCount} views * ${this.calculateSpan(
+                  publishedAt,
+                )} years ago`}</p>
+                <UserResponses>
+                  <IconButton
+                    check={isLiked}
+                    type="button"
+                    onClick={this.toggleLiked}
+                  >
+                    <BiLike size={20} />
+                    Like
+                  </IconButton>
+                  <IconButton
+                    check={isDisliked}
+                    type="button"
+                    onClick={this.toggleDisiked}
+                  >
+                    <BiDislike size={20} /> DisLike
+                  </IconButton>
+                  <IconButton
+                    check={!doopSaved}
+                    type="button"
+                    onClick={toggleSaved}
+                  >
+                    <BiListPlus size={30} /> {!doopSaved ? 'Saved' : 'Save'}
+                  </IconButton>
+                </UserResponses>
+              </ControlsBar>
+              <Bar />
+              <ChannelContainer>
+                <Logo src={profileImageUrl} alt="channel logo" />
+                <NameContainer>
+                  <ChannelName>{name}</ChannelName>
+                  <GrayPara>{subscriberCount} subscribers</GrayPara>
+                </NameContainer>
+              </ChannelContainer>
+              <DescriptionOfVideo>{description}</DescriptionOfVideo>
+            </VideoContainer>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 
@@ -189,17 +234,17 @@ class VideoDetails extends Component {
       <ThemeContext.Consumer>
         {value => {
           const {isDark} = value
-          const {match} = this.props
-          const {params} = match
-          const {id} = params
           return (
             <>
               <Header />
               <HomeContainer>
                 <SideTabBar />
-                <RemainContainer isDark={isDark} data-testid="videoItemDetails">
+                <RemainContainer2
+                  isDark={isDark}
+                  data-testid="videoItemDetails"
+                >
                   {this.renderSuitableView(isDark)}
-                </RemainContainer>
+                </RemainContainer2>
               </HomeContainer>
             </>
           )

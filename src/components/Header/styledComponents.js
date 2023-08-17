@@ -30,6 +30,7 @@ export const ProfileImage = styled.img`
 `
 export const NavContainer = styled.ul`
   width: 100vw;
+  list-style-type: none;
   display: flex;
   justify-content: space-between;
 `

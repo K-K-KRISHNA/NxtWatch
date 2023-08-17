@@ -6,6 +6,8 @@ const ThemeContext = React.createContext({
   activeTabId: 'Home',
   changeTab: () => {},
   savedVideos: [],
+  addSavedVideo: () => {},
+  removeSavedVideo: () => {},
 })
 
 export default ThemeContext

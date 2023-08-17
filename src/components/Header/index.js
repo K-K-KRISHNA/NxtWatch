@@ -50,17 +50,21 @@ class Header extends Component {
                   />
                 </Link>
                 <RightHeaderContainer>
-                  <ModeContainer
-                    iconColor={iconColor}
-                    onClick={toggleMode}
-                    data-testid="theme"
-                  >
-                    {isDark ? <BiSun size="40" /> : <FaMoon size="40" />}
-                  </ModeContainer>
-                  <ProfileImage
-                    src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
-                    alt="profile"
-                  />
+                  <li>
+                    <ModeContainer
+                      iconColor={iconColor}
+                      onClick={toggleMode}
+                      data-testid="theme"
+                    >
+                      {isDark ? <BiSun size="40" /> : <FaMoon size="40" />}
+                    </ModeContainer>
+                  </li>
+                  <li>
+                    <ProfileImage
+                      src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
+                      alt="profile"
+                    />
+                  </li>
                   <LogoutPopup onClickLogout={this.onClickLogout} />
                 </RightHeaderContainer>
               </NavContainer>
